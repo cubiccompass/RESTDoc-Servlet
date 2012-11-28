@@ -24,7 +24,7 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
     	try {
 			if(req.getServletPath().toLowerCase().endsWith("describe")){
-				doOption(req, resp);
+				doOptions(req, resp);
 			}
 			else{
 				processGet(req, resp);
@@ -47,7 +47,8 @@ public class HelloServlet extends HttpServlet {
     	writer.endObject();
 	}
 
-	public void doOption(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+    @Override
+	public void doOptions(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		ServletOutputStream output = resp.getOutputStream();
 		InputStream input = getServletContext().getResourceAsStream("restdocs/api.hello.json");
 		byte[] buffer = new byte[1024];
